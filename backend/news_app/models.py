@@ -11,15 +11,24 @@ class users(models.Model):
     # role will be foreign key from role table
     role = models.ForeignKey('role', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 # the role table which is either editor, chief editor, admin, or viewer, other will be added through development
 class role(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
 # category of the news article like sports, fixtures, scores, transfers, and other will be added through development
 class category(models.Model):
     name = models.CharField(max_length=50, unique=True)
     description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 # table for news article
 class news_article(models.Model):
@@ -34,6 +43,9 @@ class news_article(models.Model):
     # the category will be foreign key from category table
     category = models.ForeignKey(category, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
+
 # table for comments on news article
 class comment(models.Model):
     content = models.TextField()
@@ -42,6 +54,9 @@ class comment(models.Model):
     author = models.ForeignKey(users, on_delete=models.CASCADE)
     # the news article will be foreign key from news_article table
     news_article = models.ForeignKey(news_article, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Comment by {self.author.name} on {self.news_article.title}'
 
 # table for blog posts by community members
 class blog_post(models.Model):
@@ -54,6 +69,9 @@ class blog_post(models.Model):
     # the author will be foreign key from users table
     author = models.ForeignKey(users, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
+
 # table for forum post by community members
 class forum_post(models.Model):
     title = models.CharField(max_length=255)
@@ -65,6 +83,9 @@ class forum_post(models.Model):
     # the author will be foreign key from users table
     author = models.ForeignKey(users, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.title
+
 # table for forum post comments by community members
 class forum_comment(models.Model):
     content = models.TextField()
@@ -74,4 +95,5 @@ class forum_comment(models.Model):
     # the forum post will be foreign key from forum_post table
     forum_post = models.ForeignKey(forum_post, on_delete=models.CASCADE)
 
-
+    def __str__(self):
+        return f'Comment by {self.author.name} on {self.forum_post.title}'
