@@ -28,3 +28,9 @@ def get_trending_articles():
         published_at__gte=one_week_ago,
         views__gt=100
     ).order_by("-views")[:10]
+
+def get_all_articles():
+    """
+    Get all articles.
+    """
+    return news_article.objects.all().order_by("-published_at")
