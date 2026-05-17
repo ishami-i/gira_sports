@@ -1,5 +1,5 @@
 from django.db import models
-from .user import users
+from .user import user
 
 # table for blog posts by community members
 class blog_post(models.Model):
@@ -10,7 +10,7 @@ class blog_post(models.Model):
     views = models.IntegerField(default=0)
     status = models.CharField(max_length=20, default='draft')  # draft, published, archived
     # the author will be foreign key from users table
-    author = models.ForeignKey(users, on_delete=models.CASCADE)
+    author = models.ForeignKey(user, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
