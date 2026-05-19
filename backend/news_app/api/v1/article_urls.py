@@ -1,6 +1,5 @@
 from django.urls import path
-from news_app.views.article_views import trending_articles
-from news_app.views.article_views import get_all_articles
+from news_app.views.article_views import trending_articles, get_all_articles
 
 urlpatterns = [
     path('trending/', trending_articles, name='trending-articles'),
