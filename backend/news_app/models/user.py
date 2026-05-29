@@ -6,7 +6,7 @@ class User(models.Model):
         VIEWER = 'VIEWER', 'Viewer'
         AUTHOR = 'AUTHOR', 'Author'
         EDITOR = 'EDITOR', 'Editor'
-        CHIEF_EDITOR = 'CHIEF_ED', 'Chief Editor'
+        CHIEF_EDITOR = 'CHIEF_ED', 'Chief Editor', 'Chief'
 
     name = models.CharField(max_length=250)
     email = models.EmailField(unique=True)
