@@ -1,7 +1,10 @@
+from datetime import datetime
+from django.utils import timezone
 from ..models.blog_post import blog_post
 
 # Service functions for blog posts
 
+# get all blog posts ordered by published date
 def get_all_blog_posts():
     """
     Get all blog posts.
@@ -17,7 +20,7 @@ def upload_blog_post(title, slug, content, author):
         title=title,
         slug=slug,
         content=content,
-        author=author
+        author=author     
     )
     new_blog_post.save()
     return new_blog_post
