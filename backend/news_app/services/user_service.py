@@ -3,7 +3,10 @@ from django.contrib.auth.hashers import make_password
 from ..models.user import User
 
 # Service functions for users
-
+# setting up a regex pattern for validating email, phone number, and name
+EMAIL_REGEX = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+PHONE_REGEX = r'^\+?1?\d{9,15}$'
+NAME_REGEX = r'^[a-zA-Z\s]+$'
 # get all users
 def get_all_users():
     """
@@ -52,8 +55,6 @@ def create_user(name, email, phone_number, raw_password, role=user.Role.VIEWER):
     Create a new user.
     """ 
     new_user = User(
-        name=name,
-        email=email,
-        phone_number=phone_number,
-
+        if not re.match(NAME_REGEX, name):
+            raise ValueError("Invalid name format. Name should only contain letters and spaces.")
     )
