@@ -37,3 +37,25 @@ def all_articles(request):
             'category': article.category.name
         })
     return JsonResponse(data, safe=False)
+
+# adding a new article to the database
+def add_article(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        author_id = request.POST.get('author_id')
+        category_id = request.POST.get('category_id')
+        article = add_article(title, content, author_id, category_id)
+        data = {
+            'title': article.title,
+            'slug': article.slug,
+            'content': article.content,
+            'published_at': article.published_at,
+            'views': article.views,
+            'status': article.status,
+            'author': article.author.name,
+            'category': article.category.name
+        }
+        return JsonResponse(data)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
