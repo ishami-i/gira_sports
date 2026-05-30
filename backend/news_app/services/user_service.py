@@ -53,8 +53,20 @@ def delete_user(user_id):
 def create_user(name, email, phone_number, raw_password, role=user.Role.VIEWER):
     """
     Create a new user.
-    """ 
+    """
+    if not re.match(NAME_REGEX, name):
+        raise ValueError("Invalid name format. Only letters and spaces are allowed.")
+    if not re.match(EMAIL_REGEX, email):
+        raise ValueError("Invalid email format.")
+    if not re.match(PHONE_REGEX, phone_number):
+        raise ValueError("Invalid phone number format.")
+    
     new_user = User(
-        if not re.match(NAME_REGEX, name):
-            raise ValueError("Invalid name format. Name should only contain letters and spaces.")
+        name=name,
+        email=email,
+        phone_number=phone_number,
+        password=make_password(raw_password),
+        role=role
     )
+    new_user.save()
+    return new_user
