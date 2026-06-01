@@ -47,3 +47,81 @@ def add_article(title, content, author):
         author=author
     )
     return article
+
+# updating an existing article in the database
+def update_article(article_id, title=None, content=None):
+    """
+    Update an existing article in the database.
+    """
+    try:
+        article = news_article.objects.get(id=article_id)
+        if title:
+            article.title = title
+        if content:
+            article.content = content
+        article.save()
+        return article
+    except news_article.DoesNotExist:
+        return None
+    
+
+# deleting an article from the database
+def delete_article(article_id):
+    """
+    Delete an article from the database.
+    """
+    try:
+        article = news_article.objects.get(id=article_id)
+        article.delete()
+        return True
+    except news_article.DoesNotExist:
+        return False
+
+# incrementing the view count of an article
+def increment_article_views(article_id):
+    """
+    Increment the view count of an article.
+    """
+    try:
+        article = news_article.objects.get(id=article_id)
+        article.views += 1
+        article.save()
+        return article
+    except news_article.DoesNotExist:
+        return None
+
+# getting a single article by its id
+def get_article_by_id(article_id):
+    """
+    Get a single article by its id.
+    """
+    try:
+        return news_article.objects.get(id=article_id)
+    except news_article.DoesNotExist:
+        return None
+
+# getting articles by a specific author
+def get_articles_by_author(author):
+    """
+    Get articles by a specific author.
+    """
+    return news_article.objects.filter(author=author).order_by("-published_at")
+
+# getting articles published within a specific date range
+def get_articles_by_date_range(start_date, end_date):
+    """
+    Get articles published within a specific date range.
+    """
+    return news_article.objects.filter(
+        published_at__gte=start_date,
+        published_at__lte=end_date
+    ).order_by("-published_at")
+
+# getting articles that contain a specific keyword in the title or content
+def get_articles_by_keyword(keyword):
+    """
+    Get articles that contain a specific keyword in the title or content.
+    """
+    return news_article.objects.filter(
+        Q(title__icontains=keyword) | Q(content__icontains=keyword)
+    ).order_by("-published_at")
