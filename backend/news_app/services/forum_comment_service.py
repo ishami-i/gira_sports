@@ -22,3 +22,15 @@ def add_comment_to_forum_post(forum_post, content, author):
         created_at=timezone.now()
     )
     return ForumComment(comment).data
+
+# add comment to a specific comment (reply to a comment)
+def add_reply_to_comment(parent_comment, content, author):
+    """
+    Add a new comment to a specific comment (reply to a comment).
+    """
+    reply = parent_comment.replies.create(
+        content=content,
+        author=author,
+        created_at=timezone.now()
+    )
+    return ForumComment(reply).data
