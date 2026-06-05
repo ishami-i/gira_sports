@@ -30,4 +30,26 @@ def search_articles(query):
 
     return articles
 
+# searching through the forum posts based on a query string and the similarity of the query string to the forum post title using trigram similarity.
+def search_forum_posts(query):
+    """
+    Search through the forum posts based on a query string and the similarity of the query string to the forum post title using trigram similarity.
+    """
+    if not query_pattern.match(query):
+        return []
+    from news_app.models.forum_post import ForumPost
+    forum_posts = ForumPost.objects.all()
+
+    if query:
+        forum_posts = ForumPost.annotate(
+            similarity = TrigramSimilarity('title', query)
+        ).filter(
+            similarity__gt=0.3
+        ).order_by(
+            '-similarity'
+        )
+    else:
+        print('no forum posts found')
+
+    return forum_posts
 
