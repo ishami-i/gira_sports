@@ -77,19 +77,6 @@ def delete_article(article_id):
     except news_article.DoesNotExist:
         return False
 
-# incrementing the view count of an article
-def increment_article_views(article_id):
-    """
-    Increment the view count of an article.
-    """
-    try:
-        article = news_article.objects.get(id=article_id)
-        article.views += 1
-        article.save()
-        return article
-    except news_article.DoesNotExist:
-        return None
-
 # getting a single article by its id
 def get_article_by_id(article_id):
     """
