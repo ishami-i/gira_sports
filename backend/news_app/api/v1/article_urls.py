@@ -1,5 +1,5 @@
 from django.urls import path
-from news_app.views.article_views import trending_articles, get_all_articles, add_article, update_article, delete_article, increment_article_views
+from news_app.views.article_views import trending_articles, get_all_articles, add_article, update_article, delete_article
 
 urlpatterns = [
     path('trending/', trending_articles, name='trending-articles'),
@@ -7,5 +7,4 @@ urlpatterns = [
     path('add/', add_article, name='add-article'),
     path('update/<int:article_id>/<int:author_id>/', update_article, name='update-article'),
     path('delete/<int:article_id>/<int:author_id>/', delete_article, name='delete-article'),
-    path('increment-views/<int:article_id>/', increment_article_views, name='increment-article-views'),
 ]
