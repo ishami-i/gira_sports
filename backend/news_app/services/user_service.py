@@ -50,7 +50,7 @@ def delete_user(user_id):
         return False
     
 # create a new user
-def create_user(name, email, phone_number, raw_password, role=user.Role.VIEWER):
+def create_user(name, email, phone_number, raw_password, role=User.Role.VIEWER):
     """
     Create a new user.
     """
