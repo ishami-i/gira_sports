@@ -1,0 +1,121 @@
+/* Base Reset & Variables */
+:root {
+    --nav-bg: #ffffff;
+    --text-color: #333333;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var-—nav-bg;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    height: 40px;
+    display: block;
+}
+
+/* --- Mobile First Styles (Small Screens) --- */
+.search-container {
+    display: none; /* Hidden on small screens */
+}
+
+.nav {
+    display: none; /* Hidden by default on mobile */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--nav-bg);
+    box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.nav.open {
+    display: block; /* Shows menu when burger is active */
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    margin: 0;
+}
+
+.nav-item a {
+    display: block;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    color: var(--text-color);
+    text-transform: capitalize;
+}
+
+/* Burger Button Component */
+.burger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 11;
+}
+
+.bar {
+    width: 2rem;
+    height: 0.25rem;
+    background: var(--text-color);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+}
+
+/* Burger Animation states */
+.transform-top { transform: rotate(45deg) translate(5px, 5px); }
+.transform-middle { opacity: 0; }
+.transform-bottom { transform: rotate(-45deg) translate(5px, -5px); }
+
+
+/* --- Desktop Layout (Larger Screens) --- */
+@media (min-width: 768px) {
+    .burger-menu {
+        display: none; /* Hide burger on desktop */
+    }
+
+    .search-container {
+        display: flex;
+        flex: 1;
+        max-width: 400px;
+        margin: 0 2rem;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+    }
+
+    .nav {
+        display: block; /* Always visible on desktop */
+        position: static;
+        width: auto;
+        box-shadow: none;
+    }
+
+    .nav-list {
+        flex-direction: row;
+        padding: 0;
+    }
+
+    .nav-item a {
+        padding: 0.5rem 1rem;
+    }
+}
