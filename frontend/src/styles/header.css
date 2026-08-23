@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: var-—nav-bg;
+    background-color: var(--nav-bg);
     position: relative;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -53,6 +53,11 @@
     text-decoration: none;
     color: var(--text-color);
     text-transform: capitalize;
+}
+
+.nav-item a.active {
+    color: var(--accent, #aa3bff);
+    font-weight: 600;
 }
 
 /* Burger Button Component */

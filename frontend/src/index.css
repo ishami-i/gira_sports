@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
@@ -55,15 +57,24 @@ body {
 }
 
 #root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* Editorial column width used by the main site chrome. The /write
+   composer intentionally opts out of this to use the full viewport. */
+.site-frame {
   width: 1126px;
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
   border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  flex: 1;
 }
 
 h1,
